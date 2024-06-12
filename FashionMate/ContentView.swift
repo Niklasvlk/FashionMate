@@ -2,49 +2,24 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Fashion AI App")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-
-                Text("Willkommen bei Trendify!")
-                    .font(.title2)
-                    .padding(.bottom, 40)
-
-                NavigationLink(destination: StyleSuggestionsView()) {
+        TabView {
+            StyleSuggestionsView()
+                .tabItem {
+                    Image(systemName: "wand.and.stars")
                     Text("Style Vorschläge")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 200, height: 50)
-                        .background(Color.blue)
-                        .cornerRadius(10)
                 }
-                .padding(.bottom, 20)
-
-                NavigationLink(destination: TrendsView()) {
+            
+            TrendsView()
+                .tabItem {
+                    Image(systemName: "flame")
                     Text("Trends")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 200, height: 50)
-                        .background(Color.green)
-                        .cornerRadius(10)
                 }
-                .padding(.bottom, 20)
-                
-                NavigationLink(destination: WardrobeView()) {
+            
+            WardrobeView()
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
                     Text("Kleiderschrank")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 200, height: 50)
-                        .background(Color.orange)
-                        .cornerRadius(10)
                 }
-            }
         }
     }
 }
@@ -74,24 +49,26 @@ struct WardrobeView: View {
     ]
     
     var body: some View {
-        VStack {
-            Text("Mein Kleiderschrank")
-                .font(.largeTitle)
-                .padding(.top)
+        NavigationView {
+            VStack {
+                Text("Mein Kleiderschrank")
+                    .font(.largeTitle)
+                    .padding(.top)
 
-            List(clothes, id: \.0) { item in
-                HStack {
-                    Image(item.0)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                    Text(item.1)
-                        .font(.title2)
-                        .padding(.leading, 10)
+                List(clothes, id: \.0) { item in
+                    HStack {
+                        Image(item.0)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                        Text(item.1)
+                            .font(.title2)
+                            .padding(.leading, 10)
+                    }
                 }
             }
+            .navigationBarTitle("Kleiderschrank", displayMode: .inline)
         }
-        .navigationBarTitle("Kleiderschrank", displayMode: .inline)
     }
 }
 

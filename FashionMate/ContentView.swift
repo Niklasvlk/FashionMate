@@ -47,31 +47,67 @@ struct WardrobeView: View {
         ("dress", "Kleid"),
         ("shoes", "Schuhe")
     ]
-    
+
+    @State private var showSettings = false
+
     var body: some View {
         NavigationView {
             VStack {
                 Text("Mein Kleiderschrank")
-                    .font(.largeTitle)
-                    .padding(.top)
+                  .font(.largeTitle)
+                  .padding(.top)
 
                 List(clothes, id: \.0) { item in
                     HStack {
                         Image(item.0)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
+                          .resizable()
+                          .frame(width: 50, height: 50)
+                          .clipShape(Circle())
                         Text(item.1)
-                            .font(.title2)
-                            .padding(.leading, 10)
+                          .font(.title2)
+                          .padding(.leading, 10)
                     }
                 }
             }
-            .navigationBarTitle("Kleiderschrank", displayMode: .inline)
+          .navigationBarTitle("Kleiderschrank", displayMode:.inline)
+          .navigationBarItems(trailing: Button(action: {
+                self.showSettings = true
+            }) {
+                Image(systemName: "gear")
+                  .imageScale(.large)
+                  .padding()
+            })
+          .sheet(isPresented: $showSettings) {
+                SettingsView()
+            }
         }
     }
 }
 
+struct SettingsView: View {
+    @State private var name = ""
+    @State private var age = ""
+    @State private var size = ""
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Name", text: $name)
+                    TextField("Alter", text: $age)
+                    TextField("Größe", text: $size)
+                }
+            }
+           .navigationBarTitle("Einstellungen", displayMode:.inline)
+           .navigationBarItems(trailing: Button(action: {
+                // Speichere die Einstellungen
+                print("Einstellungen gespeichert: \(name), \(age), \(size)")
+            }) {
+                Text("Speichern")
+            })
+        }
+    }
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

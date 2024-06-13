@@ -41,33 +41,103 @@ struct ShoppingView: View {
 
 struct StyleSuggestionsView: View {
     let outfits = [
-    ("fit1"),
-    ("fit2"),
-    ("fit3"),
-    ("fit4")
+        ("fit1","1"),
+        ("fit2","2"),
+        ("fit3","3"),
+        ("fit4","4")
     ]
+
     var body: some View {
         NavigationView {
-            VStack{
+            VStack {
                 Text("Styles")
-                    .position(CGPoint(x: 196.0, y: 10.0))
-                    .font(.title)
+                   .font(.title)
                 Text("Wetter: 23Grad & Sonnig")
-                    .position(CGPoint(x: 130.0, y: -250.0)
-                    )
-                    .font(.headline)
+                   .font(.headline)
+
+                HStack {
+                    Image(outfits[0].0)
+                       .resizable()
+                       .frame(width: 150, height: 200)
+                    Image(outfits[1].0)
+                       .resizable()
+                       .frame(width: 150, height: 200)
+                }
+
+                HStack {
+                    Image(outfits[2].0)
+                       .resizable()
+                       .frame(width: 150, height: 200)
+                    Image(outfits[3].0)
+                       .resizable()
+                       .frame(width: 150, height: 200)
+                }
+
             }
-
-
         }
+    }
+}
+struct Trend: Identifiable {
+    let id = UUID()
+    var name: String
+    var description: String
+    var image: String
+}
+
+struct SearchBar: View {
+    @Binding var text: String
+
+    var body: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+               .foregroundColor(.secondary)
+
+            TextField("Search", text: $text)
+               .foregroundColor(.primary)
+
+            Button(action: {
+                self.text = ""
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                   .foregroundColor(.secondary)
+            }
+        }
+       .padding(.vertical, 8)
+       .padding(.horizontal, 16)
+       .background(Color(.systemGray6))
+       .cornerRadius(10.0)
     }
 }
 
 struct TrendsView: View {
+    @State private var searchText = ""
+
+    let trends: [Trend] = [
+        Trend(name: "Sustainable Fashion", description: "Mode, die umweltfreundlich ist", image: "image1"),
+        Trend(name: "90s Revival", description: "Die 90er Jahre sind zurück", image: "image2"),
+        Trend(name: "Streetwear", description: "Mode, die auf der Straße entsteht", image: "image1"),
+        // ...
+    ]
+
     var body: some View {
-        Text("Hier werden die neuesten Trends angezeigt")
-            .font(.title)
-            .navigationBarTitle("Trends", displayMode: .inline)
+        NavigationView {
+            VStack {
+                SearchBar(text: $searchText)
+                   .padding(.horizontal)
+
+                List(trends.filter { $0.name.contains(searchText) || $0.description.contains(searchText) }) { trend in
+                    NavigationLink(destination: Image(trend.image)) {
+                        VStack(alignment:.leading) {
+                            Text(trend.name)
+                               .font(.headline)
+                            Text(trend.description)
+                               .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+           .navigationBarTitle("Trends", displayMode:.inline)
+        }
     }
 }
 

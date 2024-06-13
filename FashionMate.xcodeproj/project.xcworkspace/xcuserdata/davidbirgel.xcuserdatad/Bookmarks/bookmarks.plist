@@ -10,15 +10,15 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingColumnNumber</key>
-					<string>0</string>
+					<string>1</string>
 					<key>EndingLineNumber</key>
-					<string>65</string>
+					<string>141</string>
 					<key>StartingColumnNumber</key>
-					<string>0</string>
+					<string>1</string>
 					<key>StartingLineNumber</key>
-					<string>64</string>
+					<string>141</string>
 					<key>Timestamp</key>
-					<string>739982497.522414</string>
+					<string>739983862.907994</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -34,16 +34,15 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>
-</string>
+				<string></string>
 				<key>leading</key>
-				<string>    }
-}
-</string>
+				<string>        }
+    }
+}</string>
 				<key>trailing</key>
-				<string>struct TrendsView: View {
-    var body: some View {
-        Text("Hier werden die neuesten Trends angezeigt")
+				<string>
+
+struct WardrobeView: View {
 </string>
 			</dict>
 			<key>type</key>

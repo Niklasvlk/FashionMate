@@ -198,6 +198,7 @@ struct WardrobeView: View {
 
     @State private var showSettings = false
     @State private var showProfile = false
+    @State private var showAddClothing = false
 
     var body: some View {
         NavigationView {
@@ -217,6 +218,20 @@ struct WardrobeView: View {
                           .padding(.leading, 10)
                     }
                 }
+                Button(action: {
+                    self.showAddClothing = true
+                }) {
+                    Text("Kleidungsstück hinzufügen")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .sheet(isPresented: $showAddClothing) {
+                    AddClothingView()
+                }
+                
             }
             
             .navigationBarItems(trailing: Button(action: {
@@ -240,6 +255,43 @@ struct WardrobeView: View {
           .sheet(isPresented: $showSettings) {
                 SettingsView()
             }
+        }
+    }
+}
+struct AddClothingView: View {
+    @State private var button3 = false
+
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        NavigationView {
+            Form {
+
+                Button("Hemd hinzufügen") {
+                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                }
+                Button("Hose hinzufügen") {
+                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                }
+                Button("Jacke hinzufügen") {
+                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                }
+                Button("Schuhe hinzufügen") {
+                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                }
+                Button("Barcode scannen") {
+                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                }
+                .font(.largeTitle)
+            }
+           .navigationBarTitle("Hinzufügen", displayMode:.inline)
+           .navigationBarItems(trailing: Button(action: {
+                // Speichere die Einstellungen
+               self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Zurück")
+            })
+            
         }
     }
 }

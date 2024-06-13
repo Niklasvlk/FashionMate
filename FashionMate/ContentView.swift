@@ -40,20 +40,25 @@ struct ShoppingView: View {
 }
 
 struct StyleSuggestionsView: View {
+    let outfits = [
+    ("fit1"),
+    ("fit2"),
+    ("fit3"),
+    ("fit4")
+    ]
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Sonne")
+            VStack{
+                Text("Styles")
+                    .position(CGPoint(x: 196.0, y: 10.0))
                     .font(.title)
-                Text("23°C")
-                    .font(.largeTitle)
-                    .padding(.top)
-                
-                Text("Vorschläge für dich")
-                    .font(.subheadline)
-                    .padding(.top)
+                Text("Wetter: 23Grad & Sonnig")
+                    .position(CGPoint(x: 130.0, y: -250.0)
+                    )
+                    .font(.headline)
             }
-            .navigationBarTitle("Style Vorschläge", displayMode:.inline)
+
+
         }
     }
 }
@@ -70,7 +75,7 @@ struct WardrobeView: View {
     let clothes = [
         ("shirt", "Hemd"),
         ("pants", "Hose"),
-        ("dress", "Jacke"),
+        ("jacket", "Jacke"),
         ("shoes", "Schuhe")
     ]
 
@@ -185,4 +190,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-

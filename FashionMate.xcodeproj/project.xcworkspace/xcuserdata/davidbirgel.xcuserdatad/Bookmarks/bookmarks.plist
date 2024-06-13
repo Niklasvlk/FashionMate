@@ -10,15 +10,15 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingColumnNumber</key>
-					<string>1</string>
+					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>141</string>
+					<string>189</string>
 					<key>StartingColumnNumber</key>
-					<string>1</string>
+					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>141</string>
+					<string>188</string>
 					<key>Timestamp</key>
-					<string>739983862.907994</string>
+					<string>739984674.471751</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -34,15 +34,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string></string>
+				<string>}
+</string>
 				<key>leading</key>
 				<string>        }
     }
-}</string>
+</string>
 				<key>trailing</key>
 				<string>
-
 struct WardrobeView: View {
+    let clothes = [
 </string>
 			</dict>
 			<key>type</key>

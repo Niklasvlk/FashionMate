@@ -32,10 +32,57 @@ struct ContentView: View {
 }
 
 struct ShoppingView: View {
+    @State private var searchText = ""
+    let images = ["Jacke", "Tshirt", "image3"] // replace with your image names or URLs
+
     var body: some View {
-        Text("Hier ist der Shop")
-            .font(.title)
-            .navigationTitle("Shop")
+        NavigationView {
+            VStack {
+                ShopSearchBar(text: $searchText)
+                  .padding(.horizontal)
+
+                ScrollView {
+                    VStack {
+                        ForEach(images.filter { $0.contains(searchText) }, id: \.self) { image in
+                            Image(image)
+                              .resizable()
+                              .aspectRatio(contentMode:.fit)
+                              .frame(width: 200, height: 200)
+                              .clipped()
+                              .cornerRadius(10)
+                            Text("Preis: 5$")
+                        }
+                    }
+                  .padding()
+                }
+            }
+          .navigationTitle("Shop")
+        }
+    }
+}
+
+struct ShopSearchBar: View {
+    @Binding var text: String
+
+    var body: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+              .foregroundColor(.secondary)
+
+            TextField("Suchen", text: $text)
+              .foregroundColor(.primary)
+
+            Button(action: {
+                self.text = ""
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                  .foregroundColor(.secondary)
+            }
+        }
+      .padding(.vertical, 8)
+      .padding(.horizontal, 16)
+      .background(Color(.systemGray6))
+      .cornerRadius(10.0)
     }
 }
 

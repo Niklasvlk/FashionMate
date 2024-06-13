@@ -41,9 +41,20 @@ struct ShoppingView: View {
 
 struct StyleSuggestionsView: View {
     var body: some View {
-        Text("Hier werden Style Vorschläge angezeigt")
-            .font(.title)
-            .navigationBarTitle("Style Vorschläge", displayMode: .inline)
+        NavigationView {
+            VStack {
+                Text("Sonne")
+                    .font(.title)
+                Text("23°C")
+                    .font(.largeTitle)
+                    .padding(.top)
+                
+                Text("Vorschläge für dich")
+                    .font(.subheadline)
+                    .padding(.top)
+            }
+            .navigationBarTitle("Style Vorschläge", displayMode:.inline)
+        }
     }
 }
 
@@ -84,7 +95,6 @@ struct WardrobeView: View {
                     }
                 }
             }
-          .navigationBarTitle("Kleiderschrank", displayMode:.inline)
           .navigationBarItems(trailing: Button(action: {
                 self.showSettings = true
             }) {

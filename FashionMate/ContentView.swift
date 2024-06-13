@@ -75,6 +75,7 @@ struct WardrobeView: View {
     ]
 
     @State private var showSettings = false
+    @State private var showProfile = false
 
     var body: some View {
         NavigationView {
@@ -95,6 +96,18 @@ struct WardrobeView: View {
                     }
                 }
             }
+            
+            .navigationBarItems(trailing: Button(action: {
+                self.showProfile = true
+            }) {
+                Image(systemName: "person.crop.circle")
+                    .imageScale(.large)
+                    .padding()
+            })
+            .sheet(isPresented: $showProfile) {
+                ProfileView()
+            }
+            
           .navigationBarItems(trailing: Button(action: {
                 self.showSettings = true
             }) {
@@ -110,24 +123,56 @@ struct WardrobeView: View {
 }
 
 struct SettingsView: View {
-    @State private var name = ""
-    @State private var age = ""
-    @State private var size = ""
+    @State private var button1 = false
+    @State private var button2 = false
+    @State private var button3 = false
+
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Name", text: $name)
-                    TextField("Alter", text: $age)
-                    TextField("Größe", text: $size)
+                    Toggle("Mitteilungen", isOn: $button1)
+                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                    Toggle("Standort verwenden", isOn: $button2)
+                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                    Toggle("Nutzerdaten teilen", isOn: $button3)
+                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                    
                 }
             }
            .navigationBarTitle("Einstellungen", displayMode:.inline)
            .navigationBarItems(trailing: Button(action: {
                 // Speichere die Einstellungen
-                print("Einstellungen gespeichert: \(name), \(age), \(size)")
+               self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Speichern")
+            })
+        }
+    }
+}
+struct ProfileView: View {
+    @State private var name = "Max Mustermann"
+    @State private var age = "22"
+    @State private var shoesize = "44"
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section {
+                    Text("Name:")
+                    TextField("Name", text: $name)
+                    Text("Alter:")
+                    TextField("Alter", text: $age)
+                    Text("Schuhgröße:")
+                    TextField("Größe", text: $shoesize)
+                }
+            }
+           .navigationBarTitle("Profil", displayMode:.inline)
+           .navigationBarItems(trailing: Button(action: {
+                // Speichere die Einstellungen
                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Speichern")

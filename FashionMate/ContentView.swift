@@ -15,12 +15,27 @@ struct ContentView: View {
                     Text("Trends")
                 }
             
+            ShoppingView()
+                .tabItem {
+                    Image(systemName: "bag")
+                    Text("Shop")
+                }
+            
             WardrobeView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Kleiderschrank")
                 }
+            
         }
+    }
+}
+
+struct ShoppingView: View {
+    var body: some View {
+        Text("Hier ist der Shop")
+            .font(.title)
+            .navigationTitle("Shop")
     }
 }
 
@@ -44,7 +59,7 @@ struct WardrobeView: View {
     let clothes = [
         ("shirt", "Hemd"),
         ("pants", "Hose"),
-        ("dress", "Kleid"),
+        ("dress", "Jacke"),
         ("shoes", "Schuhe")
     ]
 
@@ -88,6 +103,7 @@ struct SettingsView: View {
     @State private var name = ""
     @State private var age = ""
     @State private var size = ""
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {
@@ -102,6 +118,7 @@ struct SettingsView: View {
            .navigationBarItems(trailing: Button(action: {
                 // Speichere die Einstellungen
                 print("Einstellungen gespeichert: \(name), \(age), \(size)")
+               self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Speichern")
             })
